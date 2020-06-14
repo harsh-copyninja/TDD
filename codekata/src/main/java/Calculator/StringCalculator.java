@@ -3,8 +3,9 @@ package Calculator;
 public class StringCalculator {
 
 	public int intAdd(String toBeAdded) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (toBeAdded == "")
+			return 0;
+		return Integer.parseInt(toBeAdded);
 	}
 
 }
