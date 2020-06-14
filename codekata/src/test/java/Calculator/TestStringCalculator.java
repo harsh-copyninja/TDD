@@ -15,21 +15,27 @@ public class TestStringCalculator {
 	}
 	
 	@Test
-	public void zeroParameter() {
+	public void emptyString() {
 		String toBeAdded = "";
 		assertSum(0,toBeAdded);
 	}
 	
 	@Test
-	public void OneParameter() {
+	public void oneNumber() {
 		String toBeAdded = "1";
 		assertSum(1,toBeAdded);
 	}
 	
 	@Test
-	public void TwoParameters() {
+	public void twoNumbers() {
 		String toBeAdded = "1,2";
 		assertSum(3,toBeAdded);
+	}
+	
+	@Test
+	public void multipleNumbers() {
+		String toBeAdded = "1,2,3,4,5,6";
+		assertSum(21,toBeAdded);
 	}
 	
 	private void assertSum(int expected,String toBeAdded) {
