@@ -38,6 +38,12 @@ public class TestStringCalculator {
 		assertSum(21,toBeAdded);
 	}
 	
+	@Test
+	public void newLineDelimeter() {
+		String toBeAdded = "1\n2,3";
+		assertSum(6,toBeAdded);
+	}
+	
 	private void assertSum(int expected,String toBeAdded) {
 		int ans = cal.intAdd(toBeAdded);
 		assertEquals(expected,ans);
