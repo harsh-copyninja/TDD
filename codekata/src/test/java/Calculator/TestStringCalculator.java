@@ -2,23 +2,32 @@ package Calculator;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestStringCalculator {
 
+	private StringCalculator cal;
+	
+	@Before
+	public void setUp() {
+		cal = new StringCalculator();
+	}
+	
 	@Test
 	public void zeroParameter() {
-		StringCalculator cal = new StringCalculator();
 		String toBeAdded = "";
-		int ans = cal.intAdd(toBeAdded);
-		assertEquals(0,ans);
+		assertSum(0,toBeAdded);
 	}
 	
 	@Test
 	public void OneParameter() {
-		StringCalculator cal = new StringCalculator();
 		String toBeAdded = "1";
+		assertSum(1,toBeAdded);
+	}
+	
+	private void assertSum(int expected,String toBeAdded) {
 		int ans = cal.intAdd(toBeAdded);
-		assertEquals(1,ans);
+		assertEquals(expected,ans);
 	}
 }
