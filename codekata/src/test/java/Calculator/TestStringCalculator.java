@@ -7,7 +7,10 @@ import org.junit.Test;
 public class TestStringCalculator {
 
 	@Test
-	public void setUpTest() {
-		assertEquals(1,1);
+	public void zeroParameter() {
+		StringCalculator cal = new StringCalculator();
+		String toBeAdded = "";
+		int ans = cal.intAdd(toBeAdded);
+		assertEquals(0,ans);
 	}
 }
