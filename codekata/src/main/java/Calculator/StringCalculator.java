@@ -6,7 +6,10 @@ public class StringCalculator {
 		int sum = 0;
 		String nums[] = toBeAdded.split(",");
 		for (String num : nums) {
-			sum+=parseInt(num);
+			String newLineSplitNums[] = num.split("\n");
+			for (String number : newLineSplitNums) {
+				sum+=parseInt(number);
+			}
 		}
 		return sum;
 	}
