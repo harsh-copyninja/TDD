@@ -26,6 +26,12 @@ public class TestStringCalculator {
 		assertSum(1,toBeAdded);
 	}
 	
+	@Test
+	public void TwoParameters() {
+		String toBeAdded = "1,2";
+		assertSum(3,toBeAdded);
+	}
+	
 	private void assertSum(int expected,String toBeAdded) {
 		int ans = cal.intAdd(toBeAdded);
 		assertEquals(expected,ans);
