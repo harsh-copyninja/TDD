@@ -13,4 +13,12 @@ public class TestStringCalculator {
 		int ans = cal.intAdd(toBeAdded);
 		assertEquals(0,ans);
 	}
+	
+	@Test
+	public void OneParameter() {
+		StringCalculator cal = new StringCalculator();
+		String toBeAdded = "1";
+		int ans = cal.intAdd(toBeAdded);
+		assertEquals(1,ans);
+	}
 }
