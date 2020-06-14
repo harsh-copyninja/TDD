@@ -3,15 +3,18 @@ package Calculator;
 public class StringCalculator {
 
 	public int intAdd(String toBeAdded) {
-		if (toBeAdded == "")
-			return 0;
+		int sum = 0;
 		String nums[] = toBeAdded.split(",");
-		if (nums.length == 1)
-			return parseInt(nums[0]);
-		return parseInt(nums[0])+parseInt(nums[1]);
+		for (String num : nums) {
+			sum+=parseInt(num);
+		}
+		return sum;
 	}
 	
 	private int parseInt(String num) {
+		if(num == "") {
+			return 0;
+		}
 		return Integer.parseInt(num);
 	}
 
