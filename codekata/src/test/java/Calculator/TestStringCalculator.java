@@ -73,6 +73,11 @@ public class TestStringCalculator {
 		}
 	}
 	
+	@Test
+	public void numberGreaterThan1000ShouldBeIgnored()  throws Exception{
+		String toBeAdded = "//;\n1;1001\n3";
+		assertSum(4,toBeAdded);
+	}
 	
 	private void assertSum(int expected,String toBeAdded) throws Exception{
 		int ans = cal.intAdd(toBeAdded);
