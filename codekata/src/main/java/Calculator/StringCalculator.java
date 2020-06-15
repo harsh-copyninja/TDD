@@ -11,7 +11,10 @@ public class StringCalculator {
 
 	private final String DELEMITER_REGEX = "//.*\n";
 	private String del;
+	private int count = 0;
+	
 	public int intAdd(String toBeAdded) throws NegativeNumberFoundException {
+		count++;
 		del = ",";
 		if (isNewDelimeter(toBeAdded)) {
 			del = getNewDelimeter(toBeAdded);
@@ -71,8 +74,7 @@ public class StringCalculator {
 	}
 
 	public int GetCalledCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return count;
 	}
 
 }
