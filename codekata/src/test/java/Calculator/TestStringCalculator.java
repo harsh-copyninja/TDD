@@ -55,12 +55,12 @@ public class TestStringCalculator {
 	
 	@Test
 	public void negativesShouldRaiseException() {
-		String toBeAdded = "//;\n1;-2\n3";
+		String toBeAdded = "//;\n1;-2;3;-4;-5";
 		try {
 			int ans = cal.intAdd(toBeAdded);
 			assertFalse(true);
 		}catch (NegativeNumberFoundException ex) {
-			
+			assertEquals(ex.getMessage(),"negatives not allowed");
 		}
 	}
 	
