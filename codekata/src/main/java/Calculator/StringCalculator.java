@@ -3,11 +3,13 @@ package Calculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Exception.NegativeNumberFoundException;
+
 public class StringCalculator {
 
 	private final String DELEMITER_REGEX = "//.*\n";
 	
-	public int intAdd(String toBeAdded) {
+	public int intAdd(String toBeAdded) throws NegativeNumberFoundException {
 		int sum = 0;
 		String del = ",";
 		if (isNewDelimeter(toBeAdded)) {
