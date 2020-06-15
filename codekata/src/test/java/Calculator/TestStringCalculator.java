@@ -64,6 +64,16 @@ public class TestStringCalculator {
 		}
 	}
 	
+	@Test
+	public void exceptionShouldDisplayNegatives() {
+		String toBeAdded = "//;\n1;-2;3;-4;-5";
+		try {
+			int ans = cal.intAdd(toBeAdded);
+			assertFalse(true);
+		}catch (NegativeNumberFoundException ex) {
+			assertEquals(ex.getMessage(),"negatives not allowed: -2 -4 -5");
+		}
+	}
 	
 	
 	private void assertSum(int expected,String toBeAdded) throws Exception{
