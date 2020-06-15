@@ -54,10 +54,14 @@ public class TestStringCalculator {
 	}
 	
 	@Test
-	public void negativesShouldRaiseException() throws Exception{
+	public void negativesShouldRaiseException() {
 		String toBeAdded = "//;\n1;-2\n3";
-		int ans = cal.intAdd(toBeAdded);
-		assertFalse(true);
+		try {
+			int ans = cal.intAdd(toBeAdded);
+			assertFalse(true);
+		}catch (NegativeNumberFoundException ex) {
+			
+		}
 	}
 	
 	
