@@ -70,4 +70,9 @@ public class StringCalculator {
 		return Integer.parseInt(num);
 	}
 
+	public int GetCalledCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

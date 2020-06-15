@@ -53,6 +53,14 @@ public class TestStringCalculator {
 		assertSum(6,toBeAdded);
 	}
 	
+	@Test
+	public void numberOfTimesAddCalled()  throws Exception{
+		String toBeAdded = "//;\n1;2\n3";
+		for(int i = 1;i<=10;i++) {
+			int temp = cal.intAdd(toBeAdded);
+			assertEquals(i,cal.GetCalledCount());
+		}
+	}
 	
 	@Test
 	public void exceptionShouldDisplayNegatives() {
