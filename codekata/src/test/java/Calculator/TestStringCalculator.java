@@ -44,6 +44,12 @@ public class TestStringCalculator {
 		assertSum(6,toBeAdded);
 	}
 	
+	@Test
+	public void newDelimeter() {
+		String toBeAdded = "//;\\n1;2";
+		assertSum(3,toBeAdded);
+	}
+	
 	private void assertSum(int expected,String toBeAdded) {
 		int ans = cal.intAdd(toBeAdded);
 		assertEquals(expected,ans);
