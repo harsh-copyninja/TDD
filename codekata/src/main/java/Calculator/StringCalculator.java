@@ -26,10 +26,13 @@ public class StringCalculator {
 	
 	private int calculateSum(String toBeAdded) throws NegativeNumberFoundException {
 		int sum = 0;
+		int number;
 		String nums[] = toBeAdded.split(del);
 		checkForNegative(nums);
 		for (String num : nums) {
-			sum+=parseInt(num);
+			number = parseInt(num);
+			//ignoring number greater than 1000 by substituting it as 0
+			sum+=(number>1000?0:number);
 		}
 		return sum;
 	}
