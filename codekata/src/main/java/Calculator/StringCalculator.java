@@ -42,11 +42,15 @@ public class StringCalculator {
 		return toBeAdded.startsWith("//");
 	}
 	
-	private int parseInt(String num) {
+	private int parseInt(String num) throws NegativeNumberFoundException {
 		if(num == "") {
 			return 0;
 		}
-		return Integer.parseInt(num);
+		int ans = Integer.parseInt(num);
+		if(ans < 0) {
+			throw new NegativeNumberFoundException();
+		}
+		return ans;
 	}
 
 }
