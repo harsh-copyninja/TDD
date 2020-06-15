@@ -4,12 +4,10 @@ public class StringCalculator {
 
 	public int intAdd(String toBeAdded) {
 		int sum = 0;
+		toBeAdded = toBeAdded.replaceAll("\n", ",");
 		String nums[] = toBeAdded.split(",");
 		for (String num : nums) {
-			String newLineSplitNums[] = num.split("\n");
-			for (String number : newLineSplitNums) {
-				sum+=parseInt(number);
-			}
+			sum+=parseInt(num);
 		}
 		return sum;
 	}
