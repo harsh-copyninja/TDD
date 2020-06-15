@@ -10,16 +10,28 @@ import Exception.NegativeNumberFoundException;
 public class StringCalculator {
 
 	private final String DELEMITER_REGEX = "//.*\n";
-	
+	private String del;
 	public int intAdd(String toBeAdded) throws NegativeNumberFoundException {
-		int sum = 0;
-		String del = ",";
+		del = ",";
 		if (isNewDelimeter(toBeAdded)) {
 			del = getNewDelimeter(toBeAdded);
 			toBeAdded = removeDelimeterText(toBeAdded);
 		}
 		toBeAdded = toBeAdded.replaceAll("\n", del);
+		return calculateSum(toBeAdded);
+	}
+	
+	private int calculateSum(String toBeAdded) throws NegativeNumberFoundException {
+		int sum = 0;
 		String nums[] = toBeAdded.split(del);
+		checkForNegative(nums);
+		for (String num : nums) {
+			sum+=parseInt(num);
+		}
+		return sum;
+	}
+
+	private void checkForNegative(String[] nums) throws NegativeNumberFoundException {
 		List<String> negativeNums = new ArrayList<String>();
 		int number;
 		for (String num : nums) {
@@ -27,16 +39,12 @@ public class StringCalculator {
 			if (number < 0 ) {
 				negativeNums.add(num);
 			}
-			else {
-				sum+=number;
-			}
 		}
 		if (negativeNums.size() > 0) {
 			throw new NegativeNumberFoundException(String.format("negatives not allowed: %s", String.join(" ", negativeNums)));
 		}
-		return sum;
 	}
-	
+
 	private String removeDelimeterText(String toBeAdded) {
 		return toBeAdded.replaceAll(DELEMITER_REGEX, "");
 	}
