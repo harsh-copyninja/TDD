@@ -48,7 +48,7 @@ public class StringCalculator {
 		}
 		int ans = Integer.parseInt(num);
 		if(ans < 0) {
-			throw new NegativeNumberFoundException();
+			throw new NegativeNumberFoundException("negatives not allowed");
 		}
 		return ans;
 	}
