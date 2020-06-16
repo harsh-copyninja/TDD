@@ -91,6 +91,11 @@ public class TestStringCalculator {
 		assertSum(6,toBeAdded);
 	}
 	
+	@Test
+	public void multipleDelimetersOfAnyLength()  throws Exception{
+		String toBeAdded = "//[**][%%]\n1**2%%3";
+		assertSum(6,toBeAdded);
+	}
 	private void assertSum(int expected,String toBeAdded) throws Exception{
 		int ans = cal.intAdd(toBeAdded);
 		assertEquals(expected,ans);
