@@ -9,11 +9,17 @@ import Exception.NegativeNumberFoundException;
 
 public class StringCalculator {
 
-	private final String DELEMITER_REGEX = "//.*\n";
-	private final String DELEMITER_REGEX_ANY_LENGTH = "//\\[.*\\]\n";
+	private String DELEMITER_REGEX;
 	private String[] delemiters;
-	private int count = 0;
-	private final String[]  defaultDels = {","};; 
+	private int count;
+	private String[]  defaultDels; 
+	
+	public  StringCalculator() {
+		DELEMITER_REGEX = "//.*\n";
+		count = 0;
+		defaultDels = new String[1];
+		defaultDels[0] = ",";
+	}
 	
 	public int intAdd(String toBeAdded) throws NegativeNumberFoundException {
 		count++;
