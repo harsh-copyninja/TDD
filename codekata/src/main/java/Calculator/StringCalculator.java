@@ -36,7 +36,6 @@ public class StringCalculator {
 				delRegex+="|";
 			}
 		}
-		System.out.println(toBeAdded +  " " + delRegex);
 		String nums[] = toBeAdded.split("["+delRegex+"]");
 		checkForNegative(nums);
 		for (String num : nums) {
@@ -51,13 +50,11 @@ public class StringCalculator {
 		List<String> negativeNums = new ArrayList<String>();
 		int number;
 		for (String num : nums) {
-			System.out.print(num+" ");
 			number=parseInt(num);
 			if (number < 0 ) {
 				negativeNums.add(num);
 			}
 		}
-		System.out.println();
 		if (negativeNums.size() > 0) {
 			throw new NegativeNumberFoundException(String.format("negatives not allowed: %s", String.join(" ", negativeNums)));
 		}
