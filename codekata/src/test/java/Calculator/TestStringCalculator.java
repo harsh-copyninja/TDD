@@ -81,8 +81,8 @@ public class TestStringCalculator {
 	
 	@Test
 	public void delimetersCanBeOfAnyLength()  throws Exception{
-		String toBeAdded = "//[***]\\n1***2***3";
-		assertSum(4,toBeAdded);
+		String toBeAdded = "//[***]\n1***2***3";
+		assertSum(6,toBeAdded);
 	}
 	
 	private void assertSum(int expected,String toBeAdded) throws Exception{

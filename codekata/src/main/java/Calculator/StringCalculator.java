@@ -10,6 +10,7 @@ import Exception.NegativeNumberFoundException;
 public class StringCalculator {
 
 	private final String DELEMITER_REGEX = "//.*\n";
+	private final String DELEMITER_REGEX_ANY_LENGTH = "//\\[.*\\]\n";
 	private String del;
 	private int count = 0;
 	
@@ -27,7 +28,7 @@ public class StringCalculator {
 	private int calculateSum(String toBeAdded) throws NegativeNumberFoundException {
 		int sum = 0;
 		int number;
-		String nums[] = toBeAdded.split(del);
+		String nums[] = toBeAdded.split(escapeSpecialCharacter(del));
 		checkForNegative(nums);
 		for (String num : nums) {
 			number = parseInt(num);
@@ -57,12 +58,19 @@ public class StringCalculator {
 	
 	private String getNewDelimeter(String toBeAdded) {
 		String del = ",";
-		Pattern pattern = Pattern.compile(DELEMITER_REGEX);
-		Matcher m = pattern.matcher(toBeAdded);
+		Pattern anyLengthPattern = Pattern.compile(DELEMITER_REGEX);
+		Matcher m = anyLengthPattern.matcher(toBeAdded);
 		if(m.find()) {
 			del = toBeAdded.substring(m.start()+2,m.end()-1);
 		}
+		if (del.startsWith("[") && del.endsWith("]")) {
+			del = del.substring(1,del.length() -1);
+		}
 		return del;
+	}
+	
+	private String escapeSpecialCharacter(String del) {
+		return del.replaceAll("\\*", "\\\\*");
 	}
 	
 	private Boolean isNewDelimeter(String toBeAdded) {
@@ -81,3 +89,4 @@ public class StringCalculator {
 	}
 
 }
+
