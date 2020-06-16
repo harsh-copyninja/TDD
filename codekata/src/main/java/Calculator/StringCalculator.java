@@ -70,7 +70,8 @@ public class StringCalculator {
 	}
 	
 	private String escapeSpecialCharacter(String del) {
-		return del.replaceAll("\\*", "\\\\*");
+		// \W designates non-word characters
+		return del.replaceAll("[\\W]", "\\\\$0");
 	}
 	
 	private Boolean isNewDelimeter(String toBeAdded) {
