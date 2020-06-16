@@ -19,7 +19,7 @@ public class StringCalculator {
 		count++;
 		delemiters = defaultDels;
 		if (isNewDelimeter(toBeAdded)) {
-			delemiters = getNewDelimeter(toBeAdded);
+			delemiters = getNewDelimeters(toBeAdded);
 			toBeAdded = removeDelimeterText(toBeAdded);
 		}
 		toBeAdded = toBeAdded.replaceAll("\n", delemiters[0]);
@@ -29,14 +29,7 @@ public class StringCalculator {
 	private int calculateSum(String toBeAdded) throws NegativeNumberFoundException {
 		int sum = 0;
 		int number;
-		String delRegex = ""  ;
-		for (int i=0; i<delemiters.length ;i++) {
-			delRegex+="("+escapeSpecialCharacter(delemiters[i])+")";
-			if( i < delemiters.length - 1) {
-				delRegex+="|";
-			}
-		}
-		String nums[] = toBeAdded.split("["+delRegex+"]");
+		String nums[] = toBeAdded.split(getDelimeterRegex());
 		checkForNegative(nums);
 		for (String num : nums) {
 			number = parseInt(num);
@@ -44,6 +37,18 @@ public class StringCalculator {
 			sum+=(number>1000?0:number);
 		}
 		return sum;
+	}
+	
+	private String getDelimeterRegex() {
+		String delRegex = "["  ;
+		for (int i=0; i<delemiters.length ;i++) {
+			delRegex+="("+escapeSpecialCharacter(delemiters[i])+")";
+			if( i < delemiters.length - 1) {
+				delRegex+="|";
+			}
+		}
+		delRegex+="]";
+		return delRegex;
 	}
 
 	private void checkForNegative(String[] nums) throws NegativeNumberFoundException {
@@ -64,7 +69,7 @@ public class StringCalculator {
 		return toBeAdded.replaceAll(DELEMITER_REGEX, "");
 	}
 	
-	private String[] getNewDelimeter(String toBeAdded) {
+	private String[] getNewDelimeters(String toBeAdded) {
 		String del = "";
 		String[]  dels = null;
 		Pattern anyLengthPattern = Pattern.compile(DELEMITER_REGEX);
