@@ -11,24 +11,33 @@ public class StringCalculator {
 
 	private final String DELEMITER_REGEX = "//.*\n";
 	private final String DELEMITER_REGEX_ANY_LENGTH = "//\\[.*\\]\n";
-	private String del;
+	private String[] delemiters;
 	private int count = 0;
+	private final String[]  defaultDels = {","};; 
 	
 	public int intAdd(String toBeAdded) throws NegativeNumberFoundException {
 		count++;
-		del = ",";
+		delemiters = defaultDels;
 		if (isNewDelimeter(toBeAdded)) {
-			del = getNewDelimeter(toBeAdded);
+			delemiters = getNewDelimeter(toBeAdded);
 			toBeAdded = removeDelimeterText(toBeAdded);
 		}
-		toBeAdded = toBeAdded.replaceAll("\n", del);
+		toBeAdded = toBeAdded.replaceAll("\n", delemiters[0]);
 		return calculateSum(toBeAdded);
 	}
 	
 	private int calculateSum(String toBeAdded) throws NegativeNumberFoundException {
 		int sum = 0;
 		int number;
-		String nums[] = toBeAdded.split(escapeSpecialCharacter(del));
+		String delRegex = ""  ;
+		for (int i=0; i<delemiters.length ;i++) {
+			delRegex+="("+escapeSpecialCharacter(delemiters[i])+")";
+			if( i < delemiters.length - 1) {
+				delRegex+="|";
+			}
+		}
+		System.out.println(toBeAdded +  " " + delRegex);
+		String nums[] = toBeAdded.split("["+delRegex+"]");
 		checkForNegative(nums);
 		for (String num : nums) {
 			number = parseInt(num);
@@ -42,11 +51,13 @@ public class StringCalculator {
 		List<String> negativeNums = new ArrayList<String>();
 		int number;
 		for (String num : nums) {
+			System.out.print(num+" ");
 			number=parseInt(num);
 			if (number < 0 ) {
 				negativeNums.add(num);
 			}
 		}
+		System.out.println();
 		if (negativeNums.size() > 0) {
 			throw new NegativeNumberFoundException(String.format("negatives not allowed: %s", String.join(" ", negativeNums)));
 		}
@@ -56,8 +67,9 @@ public class StringCalculator {
 		return toBeAdded.replaceAll(DELEMITER_REGEX, "");
 	}
 	
-	private String getNewDelimeter(String toBeAdded) {
-		String del = ",";
+	private String[] getNewDelimeter(String toBeAdded) {
+		String del = "";
+		String[]  dels = null;
 		Pattern anyLengthPattern = Pattern.compile(DELEMITER_REGEX);
 		Matcher m = anyLengthPattern.matcher(toBeAdded);
 		if(m.find()) {
@@ -66,7 +78,11 @@ public class StringCalculator {
 		if (del.startsWith("[") && del.endsWith("]")) {
 			del = del.substring(1,del.length() -1);
 		}
-		return del;
+		dels = del.split("\\]\\[");
+		if (dels == null) {
+			return defaultDels;
+		}
+		return dels;
 	}
 	
 	private String escapeSpecialCharacter(String del) {
@@ -79,7 +95,7 @@ public class StringCalculator {
 	}
 	
 	private int parseInt(String num) {
-		if(num == "") {
+		if(num.length() == 0) {
 			return 0;
 		}
 		return Integer.parseInt(num);
